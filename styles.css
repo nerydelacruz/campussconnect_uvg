@@ -173,6 +173,59 @@
   .value-card h3 { font-size: 20px; font-weight: 600; margin: 20px 0 8px; color: #17140f; }
   .value-card p { font-size: 16px; line-height: 1.6; color: #5f5c54; margin: 0; }
 
+  /*Detalles*/
+  .details-card {
+  position: relative;
+  background: #17140f;
+  border-radius: 20px;
+  padding: 36px;
+  color: #fff;
+  overflow: hidden;
+}
+.details-card__dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(#243a2c 1.3px, transparent 1.3px);
+  background-size: 24px 24px;
+  opacity: 0.4;
+}
+.details-card__body { position: relative; }
+
+.details-card__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: #159a3a; }
+.eyebrow--light { color: #57c777; }
+.details-card__badge {
+  font-family: "IBM Plex Mono", monospace; font-size: 12px; font-weight: 600;
+  color: #101b13; background: #57c777; padding: 5px 12px; border-radius: 999px;
+}
+
+.details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+.detail-tile {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #2c2820;
+  border-radius: 14px;
+  padding: 18px;
+}
+.detail-tile__ico {
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 10px; background: #57c777;
+}
+.detail-tile__label {
+  font-family: "IBM Plex Mono", monospace; font-size: 12px; color: #8fa596;
+  text-transform: uppercase; letter-spacing: 0.06em; margin-top: 14px;
+}
+.detail-tile__value { font-size: 16px; font-weight: 600; margin-top: 4px; line-height: 1.3; }
+
+.details-card__cta {
+  display: block; text-align: center; margin-top: 20px;
+  background: #159a3a; color: #fff; font-weight: 700; font-size: 16px;
+  padding: 15px; border-radius: 12px; text-decoration: none;
+}
+.details-card__cta:hover { background: #12812f; color: #fff; }
+
+@media (max-width: 420px) {
+  .details-grid { grid-template-columns: 1fr; }
+}
+
   /* Audience + details */
   .about-bottom { padding: 40px 0 88px; }
   .about-bottom__grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: start; }
