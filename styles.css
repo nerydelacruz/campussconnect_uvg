@@ -13,7 +13,7 @@
   a { color: #147a33; text-decoration: none; }
   a:hover { color: #0e5824; }
   img { display: block; }
-  ::selection { background: #159a3a; color: #fff; }
+  ::selection { background: #159a3a; color: #fff!important; }
 
   /* Layout base */
   .wrap { max-width: 1200px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
