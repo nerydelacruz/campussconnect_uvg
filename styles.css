@@ -10,6 +10,9 @@
     font-family: "Public Sans", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+  h2{
+    color:white!important;
+  }
   a { color: #147a33; text-decoration: none; }
   a:hover { color: #0e5824; }
   img { display: block; }
