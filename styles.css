@@ -10,9 +10,7 @@
     font-family: "Public Sans", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  h2 .cta__title{
-    color:white!important;
-  }
+
   a { color: #147a33; text-decoration: none; }
   a:hover { color: #0e5824; }
   img { display: block; }
@@ -102,6 +100,7 @@
     font-family: "Source Serif 4", serif; font-weight: 500;
     font-size: clamp(30px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.02em;
     margin: 0 auto; max-width: 20ch;
+    color:white!important;
   }
   .cta__lead { max-width: 52ch; margin: 20px auto 0; font-size: 18px; line-height: 1.6; color: #c9c6bf; }
 
