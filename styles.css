@@ -1,6 +1,6 @@
  * { box-sizing: border-box; }
- :root {
-    --wp--style--global--content-size: 100%!important;
+.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+    max-width:100%!important ;
 }
   html { scroll-behavior: smooth; }
   body {
