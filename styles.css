@@ -76,3 +76,12 @@
   text-decoration: none;
 }
 .hero__btn-secondary:hover { border-color: #17140f; }
+
+.navbar_register{
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    background: rgb(23, 20, 15);
+    padding: 10px 20px;
+    border-radius: 8px;
+}
