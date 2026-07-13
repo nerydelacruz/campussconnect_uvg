@@ -34,10 +34,10 @@
   .nav { display: flex; align-items: center; gap: 28px; }
   .nav__link { font-size: 15px; font-weight: 500; color: #3a372f; }
   .nav__cta {
-    font-size: 15px; font-weight: 600; color: #fff;
-    background: #17140f; padding: 10px 20px; border-radius: 8px;
+    font-size: 15px!important; font-weight: 600!important; color: #fff!important;
+    background: #17140f!important; padding: 10px 20px!important; border-radius: 8px!important;
   }
-  .nav__cta:hover { background: #159a3a; color: #fff; }
+  .nav__cta:hover { background: #159a3a!important; color: #fff!important; }
 
   /* Hero */
   .hero { padding: 96px 0 72px; text-align: center; }
