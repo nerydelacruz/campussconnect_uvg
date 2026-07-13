@@ -1,4 +1,7 @@
  * { box-sizing: border-box; }
+ :root {
+    --wp--style--global--content-size: 100%!important;
+}
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
@@ -161,7 +164,7 @@
 
 
 
-  
+
 
   /* Layout de registro */
 .reg { padding: 72px 0 88px; }
