@@ -814,12 +814,21 @@ h1.wp-block-post-title,
 .entry-title { display: none !important; }
 .wp-block-spacer { display: none !important; }
 
-/* nuestras secciones a lo ANCHO COMPLETO aunque el tema constrina el contenido */
+/* nuestras secciones a lo ANCHO COMPLETO:
+   (sin calc() ni var(), porque el sanitizador los elimina)
+   1) quitamos el padding lateral que el tema pone al contenedor del contenido */
+.entry-content.has-global-padding,
+.wp-block-post-content.has-global-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* 2) nuestras secciones ocupan el 100% de ese contenedor ya sin padding;
+   el ancho de lectura lo controla .wrap por dentro */
 .nav, .hero, .ribbon, .section, .footer {
-  width: 100vw;
-  max-width: 100vw !important;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
+  max-width: none !important;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* que el contenedor del tema no meta padding/margen extra a nuestros bloques */
