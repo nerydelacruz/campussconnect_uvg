@@ -31,7 +31,7 @@
 .member__avatar {
   width: 46px; height: 46px; flex: none; border-radius: 50%;
   border: var(--sticker-border);
-  display: grid; place-items: center;
+  display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-weight: 800; font-size: 16px;
 }
 .member:nth-child(4n+1) .member__avatar { background: var(--green-pale); }

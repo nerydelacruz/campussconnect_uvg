@@ -334,7 +334,7 @@ img { display: block; max-width: 100%; }
 .pillar__icon {
   width: 56px; height: 56px; border-radius: 16px;
   border: 2px solid #14231A;
-  display: grid; place-items: center; font-size: 26px;
+  display: flex; align-items: center; justify-content: center; font-size: 26px;
 }
 .pillar:nth-child(1) .pillar__icon { background: #DEEFE0; }
 .pillar:nth-child(2) .pillar__icon { background: #ffe9c2; }
@@ -531,7 +531,7 @@ img { display: block; max-width: 100%; }
 .venue__row .ico {
   width: 38px; height: 38px; flex: none;
   border: 2px solid #14231A; border-radius: 11px;
-  display: grid; place-items: center;
+  display: flex; align-items: center; justify-content: center;
   background: #ffe9c2; font-size: 17px;
 }
 .venue__row b { display: block; font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-size: 16px; }
@@ -637,7 +637,7 @@ img { display: block; max-width: 100%; }
 .member__avatar {
   width: 46px; height: 46px; flex: none; border-radius: 50%;
   border: 2px solid #14231A;
-  display: grid; place-items: center;
+  display: flex; align-items: center; justify-content: center;
   font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 800; font-size: 16px;
 }
 .member:nth-child(4n+1) .member__avatar { background: #DEEFE0; }
@@ -853,6 +853,17 @@ header.wp-block-template-part > .wp-block-group,
   padding-bottom: 0 !important;
   min-height: 0 !important;
 }
+
+/* ---------- 5. emojis convertidos a <img class="emoji"> por WordPress ---------- */
+/* WordPress reemplaza los emojis por imagenes; les damos tamano y centrado */
+img.emoji { display: inline-block; vertical-align: -0.12em; }
+.pillar__icon img.emoji { width: 28px !important; height: 28px !important; margin: 0 !important; }
+.venue__row .ico img.emoji { width: 19px !important; height: 19px !important; margin: 0 !important; }
+.chip img.emoji, .tickets__notes img.emoji { width: 15px !important; height: 15px !important; margin: 0 4px 0 0 !important; }
+.mascot__sticker img.emoji { width: 15px !important; height: 15px !important; }
+.tier__flag img.emoji { width: 12px !important; height: 12px !important; }
+.footer__legal img.emoji, .terminal__result img.emoji { width: 14px !important; height: 14px !important; }
+figcaption img.emoji { width: 13px !important; height: 13px !important; }
 
 /* respeto a usuarios con animaciones reducidas */
 @media (prefers-reduced-motion: reduce) {

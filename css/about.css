@@ -14,7 +14,7 @@
 .pillar__icon {
   width: 56px; height: 56px; border-radius: 16px;
   border: var(--sticker-border);
-  display: grid; place-items: center; font-size: 26px;
+  display: flex; align-items: center; justify-content: center; font-size: 26px;
 }
 .pillar:nth-child(1) .pillar__icon { background: var(--green-pale); }
 .pillar:nth-child(2) .pillar__icon { background: #ffe9c2; }

@@ -95,6 +95,17 @@ header.wp-block-template-part > .wp-block-group,
   min-height: 0 !important;
 }
 
+/* ---------- 5. emojis convertidos a <img class="emoji"> por WordPress ---------- */
+/* WordPress reemplaza los emojis por imagenes; les damos tamano y centrado */
+img.emoji { display: inline-block; vertical-align: -0.12em; }
+.pillar__icon img.emoji { width: 28px !important; height: 28px !important; margin: 0 !important; }
+.venue__row .ico img.emoji { width: 19px !important; height: 19px !important; margin: 0 !important; }
+.chip img.emoji, .tickets__notes img.emoji { width: 15px !important; height: 15px !important; margin: 0 4px 0 0 !important; }
+.mascot__sticker img.emoji { width: 15px !important; height: 15px !important; }
+.tier__flag img.emoji { width: 12px !important; height: 12px !important; }
+.footer__legal img.emoji, .terminal__result img.emoji { width: 14px !important; height: 14px !important; }
+figcaption img.emoji { width: 13px !important; height: 13px !important; }
+
 /* respeto a usuarios con animaciones reducidas */
 @media (prefers-reduced-motion: reduce) {
   .reveal { animation: none; opacity: 1; transform: none; }
