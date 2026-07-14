@@ -15,6 +15,7 @@
   font-family: var(--font-display); font-weight: 800;
   font-size: clamp(30px, 4.6vw, 54px); line-height: 1.06;
   max-width: 18ch; margin: 0 auto;
+  color: white!important;
 }
 .final__lead { color: #b8cfbe; max-width: 46ch; margin: 18px auto 32px; font-size: 17px; line-height: 1.6; }
 .final__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
