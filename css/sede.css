@@ -1,0 +1,38 @@
+/* ==========================================================================
+   SEDE — CIT, Universidad del Valle de Guatemala (acento terracota)
+   ========================================================================== */
+
+.venue { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+
+/* foto del campus enmarcada como sticker */
+.venue__photo {
+  border: var(--sticker-border); border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow); overflow: hidden;
+  aspect-ratio: 4/3; position: relative;
+  background: linear-gradient(140deg, #e8935f, var(--terracota));
+}
+.venue__photo img { width: 100%; height: 100%; object-fit: cover; }
+.venue__photo figcaption {
+  position: absolute; left: 16px; bottom: 16px;
+  background: #fff; border: var(--sticker-border); border-radius: 10px;
+  padding: 8px 14px;
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 600;
+  box-shadow: var(--sticker-shadow-sm);
+}
+
+/* filas de informacion (direccion, como llegar, capacidad) */
+.venue__rows { margin-top: 26px; margin-bottom: 26px; display: flex; flex-direction: column; }
+.venue__row { display: flex; gap: 14px; padding: 15px 0; border-bottom: 1.5px dashed #d8cfbc; font-size: 15.5px; }
+.venue__row:last-child { border-bottom: none; }
+.venue__row .ico {
+  width: 38px; height: 38px; flex: none;
+  border: var(--sticker-border); border-radius: 11px;
+  display: grid; place-items: center;
+  background: #ffe9c2; font-size: 17px;
+}
+.venue__row b { display: block; font-family: var(--font-display); font-size: 16px; }
+.venue__row span { color: var(--ink-soft); font-size: 14.5px; }
+
+@media (max-width: 880px) {
+  .venue { grid-template-columns: 1fr; }
+}

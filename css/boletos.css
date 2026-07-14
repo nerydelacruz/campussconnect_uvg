@@ -1,0 +1,26 @@
+/* ==========================================================================
+   BOLETOS — encabezado de seccion y notas.
+   El sistema real de boletos lo renderiza el bloque Shortcode [camptix]
+   que va ENTRE los dos bloques de HTML personalizado.
+   ========================================================================== */
+
+/* recuadro guia (solo se ve en la maqueta local; en WordPress
+   ese espacio lo ocupa el shortcode) */
+.tickets__slot {
+  margin-top: 34px;
+  background: #fff;
+  border: var(--sticker-border); border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow);
+  padding: 46px; text-align: center;
+}
+.tickets__slot .tag { font-family: var(--font-mono); font-size: 12.5px; color: var(--terracota); font-weight: 600; }
+.tickets__slot p { color: var(--ink-soft); margin-top: 10px; }
+
+/* notas bajo los boletos */
+.tickets__notes { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+.tickets__notes .chip { font-family: var(--font-body); font-weight: 600; font-size: 13.5px; }
+
+/* ajustes de convivencia con CampTix: que la tabla del plugin
+   respire dentro del diseño */
+#tix { margin-top: 34px; }
+#tix table { width: 100%; }

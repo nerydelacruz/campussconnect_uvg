@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  WordPress Campus Connect UVG 2026 — PREVIEW v2 "Esencia UVG"
+  ============================================================================
+  Identidad: crema UVG + verde bosque + terracota CIT + dorado mascota
+  Lenguaje: sticker (bordes gruesos, sombras duras) + terminal AECCTI
+  Base estructural: WordPress Day CDMX 2026 (todas sus secciones)
+
+  Autocontenido: solo para previsualizar. Al aprobarse se parte en /css y
+  en los dos bloques de WordPress (el corte esta marcado donde va [camptix]).
+
+  Mascota: guardala en assets/mascota-dragon.png
+  ============================================================================
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WordPress Campus Connect UVG 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* =========================================================================
+   TOKENS — esencia UVG
+   ========================================================================= */
+:root {
+  /* Lienzo y tinta */
+  --canvas:        #FAF5EC;   /* crema calido */
+  --canvas-soft:   #F2ECDF;
+  --ink:           #14231A;   /* tinta verde-negra */
+  --ink-soft:      #4C5C50;
+
+  /* Verdes UVG */
+  --forest:        #0E3A22;   /* verde bosque profundo (secciones oscuras) */
+  --forest-soft:   #16522F;
+  --green:         #159A3A;   /* verde principal */
+  --green-bright:  #2FBF5C;
+  --green-pale:    #DEEFE0;
+
+  /* Acentos */
+  --terracota:     #D95B2B;   /* ladrillo del CIT */
+  --gold:          #F0A402;   /* dorado mascota */
+  --gold-soft:     #FFD43B;
+  --wp-blue:       #21759B;   /* azul WordPress */
+
+  /* Lenguaje sticker */
+  --sticker-border: 2px solid var(--ink);
+  --sticker-shadow: 5px 5px 0 var(--ink);
+  --sticker-shadow-sm: 3px 3px 0 var(--ink);
+
+  /* Tipografias */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-body:    "Public Sans", system-ui, sans-serif;
+  --font-mono:    "IBM Plex Mono", monospace;
+
+  --wrap: 1160px;
+  --radius: 22px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+::selection { background: var(--gold-soft); color: var(--ink); }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+/* ---------- utilidades de marca ---------- */
+/* etiqueta terminal AECCTI */
+.term-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  letter-spacing: .06em; color: var(--forest);
+  background: var(--green-pale);
+  border: var(--sticker-border); border-radius: 999px;
+  padding: 7px 16px; box-shadow: var(--sticker-shadow-sm);
+}
+.term-tag::before { content: ">"; color: var(--terracota); font-weight: 700; }
+.term-tag--light { background: #fff; }
+.cursor { display: inline-block; width: 8px; height: 1em; background: var(--green); vertical-align: -2px; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* titulos */
+.h-display { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.02em; line-height: 1.03; }
+.h-section { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 4.2vw, 50px); letter-spacing: -0.02em; line-height: 1.06; margin-top: 18px; }
+.lead { color: var(--ink-soft); font-size: 18px; line-height: 1.65; }
+
+/* botones sticker */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  padding: 14px 28px; border-radius: 14px; cursor: pointer;
+  border: var(--sticker-border); box-shadow: var(--sticker-shadow);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--ink); }
+.btn--green  { background: var(--green-bright); color: var(--ink); }
+.btn--gold   { background: var(--gold-soft); color: var(--ink); }
+.btn--cream  { background: #fff; color: var(--ink); }
+.btn--forest { background: var(--forest); color: #fff; }
+
+/* reveal on scroll */
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal[data-delay="1"] { transition-delay: .12s; }
+.reveal[data-delay="2"] { transition-delay: .24s; }
+.reveal[data-delay="3"] { transition-delay: .36s; }
+
+/* patron de escamas de dragon (para secciones verdes) */
+.scales {
+  background-image: radial-gradient(circle at 50% 0, rgba(255,255,255,0.07) 0 10px, transparent 11px);
+  background-size: 40px 40px;
+}
+
+/* =========================================================================
+   NAV
+   ========================================================================= */
+.nav { position: sticky; top: 0; z-index: 80; background: rgba(250,245,236,0.9); backdrop-filter: blur(12px); border-bottom: var(--sticker-border); }
+.nav__inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand__mark { font-family: var(--font-mono); font-weight: 600; font-size: 15px; background: var(--forest); color: var(--green-bright); border: var(--sticker-border); border-radius: 10px; padding: 7px 10px; box-shadow: var(--sticker-shadow-sm); }
+.brand__name { font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.05; }
+.brand__name small { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 11px; color: var(--ink-soft); }
+.nav__links { display: flex; align-items: center; gap: 24px; }
+.nav__links > a:not(.btn) { font-weight: 600; font-size: 15px; color: var(--ink-soft); transition: color .2s; }
+.nav__links > a:not(.btn):hover { color: var(--green); }
+.nav__links .btn { padding: 9px 18px; font-size: 15px; }
+@media (max-width: 900px) { .nav__links > a:not(.btn) { display: none; } }
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+.hero { position: relative; overflow: hidden; padding: 84px 0 70px; }
+/* blobs decorativos */
+.hero__blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; pointer-events: none; }
+.hero__blob--green { width: 480px; height: 480px; background: #bfe6c4; top: -160px; right: -120px; animation: drift 16s ease-in-out infinite; }
+.hero__blob--gold { width: 360px; height: 360px; background: #ffe9a8; bottom: -140px; left: -100px; animation: drift 20s ease-in-out infinite reverse; }
+@keyframes drift { 50% { transform: translate(30px, 24px) scale(1.06); } }
+
+.hero__grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+.hero__title { font-size: clamp(44px, 6.4vw, 86px); margin-top: 26px; max-width: 13ch; }
+.hero__title .hl { position: relative; white-space: nowrap; }
+.hero__title .hl::after { content: ""; position: absolute; left: -2%; bottom: 6%; width: 104%; height: 34%; background: var(--gold-soft); z-index: -1; border-radius: 6px; transform: scaleX(0); transform-origin: left; animation: paint .6s .8s forwards cubic-bezier(.2,.7,.2,1); }
+@keyframes paint { to { transform: scaleX(1); } }
+.hero__title .word { display: inline-block; opacity: 0; transform: translateY(26px) rotate(1.5deg); animation: wordUp .65s forwards; }
+@keyframes wordUp { to { opacity: 1; transform: none; } }
+.hero__lead { margin-top: 24px; max-width: 46ch; font-size: 19px; }
+
+/* chips de datos (fecha/sede/precio) */
+.hero__chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 13.5px; font-weight: 600; background: #fff; border: var(--sticker-border); border-radius: 999px; padding: 9px 16px; box-shadow: var(--sticker-shadow-sm); }
+.chip b { color: var(--green); }
+.chip--terra b { color: var(--terracota); }
+.chip--gold b { color: var(--gold); }
+
+.hero__actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
+
+/* tarjeta terminal AECCTI */
+.terminal { margin-top: 40px; max-width: 480px; background: var(--forest); border: var(--sticker-border); border-radius: 16px; box-shadow: var(--sticker-shadow); overflow: hidden; }
+.terminal__bar { display: flex; align-items: center; gap: 6px; background: var(--ink); padding: 9px 14px; }
+.terminal__bar span { width: 11px; height: 11px; border-radius: 50%; }
+.terminal__bar span:nth-child(1) { background: var(--terracota); }
+.terminal__bar span:nth-child(2) { background: var(--gold-soft); }
+.terminal__bar span:nth-child(3) { background: var(--green-bright); }
+.terminal__bar em { font-style: normal; font-family: var(--font-mono); font-size: 11px; color: #8fb09e; margin-left: 8px; }
+.terminal__body { padding: 16px 18px; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.9; color: #cfe9d6; }
+.terminal__body .p { color: var(--green-bright); }
+.terminal__body .ok { color: var(--gold-soft); }
+
+/* mascota */
+.hero__mascot { position: relative; display: flex; justify-content: center; align-items: center; }
+.mascot { width: min(100%, 360px); animation: bob 5s ease-in-out infinite;
+  background: #fff; border: var(--sticker-border); border-radius: 32px;
+  box-shadow: var(--sticker-shadow); padding: 14px; }
+@keyframes bob { 50% { transform: translateY(-16px) rotate(1.5deg); } }
+.mascot__burst { position: absolute; inset: auto; width: 420px; height: 420px; z-index: -1; background:
+  radial-gradient(circle, var(--green-pale) 0 58%, transparent 59%); border-radius: 50%; }
+.mascot__sticker { position: absolute; font-family: var(--font-display); font-weight: 800; font-size: 15px; background: var(--gold-soft); border: var(--sticker-border); border-radius: 12px; padding: 8px 14px; box-shadow: var(--sticker-shadow-sm); animation: wiggle 4s ease-in-out infinite; }
+.mascot__sticker--top { top: 8%; right: 4%; rotate: 6deg; }
+.mascot__sticker--bottom { bottom: 10%; left: 0; rotate: -5deg; background: #fff; animation-delay: 1.2s; }
+@keyframes wiggle { 50% { transform: translateY(-8px) rotate(-2deg); } }
+.mascot__fallback { width: min(100%, 340px); aspect-ratio: 1; border-radius: 28px; display: none; place-items: center; text-align: center; background: #fff; border: 2px dashed var(--ink-soft); color: var(--ink-soft); font-family: var(--font-mono); font-size: 13px; padding: 22px; }
+
+@media (max-width: 920px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__mascot { order: -1; }
+  .mascot { width: min(70%, 300px); }
+  .terminal { max-width: 100%; }
+}
+
+/* =========================================================================
+   CINTA MARQUEE
+   ========================================================================= */
+.ribbon { background: var(--forest); border-top: var(--sticker-border); border-bottom: var(--sticker-border); overflow: hidden; padding: 13px 0; }
+.ribbon__track { display: flex; gap: 44px; width: max-content; animation: scrollX 24s linear infinite; }
+@keyframes scrollX { to { transform: translateX(-50%); } }
+.ribbon__item { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--canvas); white-space: nowrap; display: flex; align-items: center; gap: 44px; }
+.ribbon__item::after { content: "✦"; color: var(--gold-soft); }
+
+/* =========================================================================
+   SECCIONES
+   ========================================================================= */
+.section { position: relative; padding: 96px 0; }
+.section--forest { background: var(--forest); color: var(--canvas); }
+.section--forest .lead { color: #b8cfbe; }
+.section--soft { background: var(--canvas-soft); border-top: var(--sticker-border); border-bottom: var(--sticker-border); }
+.section__head { max-width: 640px; margin-bottom: 46px; }
+
+/* pilares (sobre el evento) */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.pillar { background: #fff; border: var(--sticker-border); border-radius: var(--radius); box-shadow: var(--sticker-shadow); padding: 30px; transition: transform .2s ease, box-shadow .2s ease; }
+.pillar:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
+.pillar__icon { width: 56px; height: 56px; border-radius: 16px; border: var(--sticker-border); display: grid; place-items: center; font-size: 26px; }
+.pillar:nth-child(1) .pillar__icon { background: var(--green-pale); }
+.pillar:nth-child(2) .pillar__icon { background: #ffe9c2; }
+.pillar:nth-child(3) .pillar__icon { background: #dbeefc; }
+.pillar h3 { font-family: var(--font-display); font-weight: 800; font-size: 24px; margin: 20px 0 8px; }
+.pillar p { color: var(--ink-soft); line-height: 1.6; font-size: 15.5px; }
+@media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } }
+
+/* para quien es (chips personas) */
+.audience { margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.audience__chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.audience__chips .chip { font-family: var(--font-body); font-weight: 600; }
+.reasons { background: var(--forest); color: var(--canvas); border: var(--sticker-border); border-radius: var(--radius); box-shadow: var(--sticker-shadow); padding: 32px; }
+.reasons h3 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin-bottom: 18px; }
+.reasons li { list-style: none; display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 15.5px; line-height: 1.5; color: #d7e7dc; }
+.reasons li:last-child { border-bottom: none; }
+.reasons li::before { content: "▸"; color: var(--gold-soft); font-weight: 700; }
+@media (max-width: 860px) { .audience { grid-template-columns: 1fr; } }
+
+/* =========================================================================
+   AGENDA
+   ========================================================================= */
+.tl { max-width: 860px; }
+.tl-item { display: grid; grid-template-columns: 90px 1fr; gap: 20px; }
+.tl-item__time { font-family: var(--font-mono); font-weight: 600; font-size: 17px; color: var(--gold-soft); text-align: right; padding-top: 22px; }
+.tl-item__track { border-left: 2px solid rgba(255,255,255,0.18); padding: 0 0 20px 26px; position: relative; }
+.tl-item__dot { position: absolute; left: -8px; top: 25px; width: 14px; height: 14px; border-radius: 50%; background: var(--green-bright); border: 2px solid var(--forest); }
+.tl-card { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 18px 22px; transition: transform .2s, background .2s; }
+.tl-card:hover { transform: translateX(6px); background: rgba(255,255,255,0.09); }
+.tl-card__kind { display: inline-block; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; padding: 3px 10px; border-radius: 999px; border: 1.5px solid currentColor; }
+.k-reg { color: var(--green-bright); } .k-talk { color: #7fd4f0; } .k-break { color: var(--gold-soft); } .k-close { color: #ff9d6b; }
+.tl-card__title { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin: 10px 0 5px; color: #fff; }
+.tl-card__desc { color: #b8cfbe; font-size: 14.5px; line-height: 1.55; }
+
+/* =========================================================================
+   BOLETOS
+   ========================================================================= */
+.tickets__slot { margin-top: 34px; background: #fff; border: var(--sticker-border); border-radius: var(--radius); box-shadow: var(--sticker-shadow); padding: 46px; text-align: center; }
+.tickets__slot .tag { font-family: var(--font-mono); font-size: 12.5px; color: var(--terracota); font-weight: 600; }
+.tickets__slot p { color: var(--ink-soft); margin-top: 10px; }
+.tickets__notes { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+.tickets__notes .chip { font-family: var(--font-body); font-weight: 600; font-size: 13.5px; }
+
+/* =========================================================================
+   SEDE (CIT — terracota)
+   ========================================================================= */
+.venue { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; }
+.venue__photo { border: var(--sticker-border); border-radius: var(--radius); box-shadow: var(--sticker-shadow); overflow: hidden; aspect-ratio: 4/3; background: linear-gradient(140deg, #e8935f, var(--terracota)); position: relative; }
+.venue__photo img { width: 100%; height: 100%; object-fit: cover; }
+.venue__photo figcaption { position: absolute; left: 16px; bottom: 16px; background: #fff; border: var(--sticker-border); border-radius: 10px; padding: 8px 14px; font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; box-shadow: var(--sticker-shadow-sm); }
+.venue__rows { margin-top: 26px; display: flex; flex-direction: column; gap: 0; }
+.venue__row { display: flex; gap: 14px; padding: 15px 0; border-bottom: 1.5px dashed #d8cfbc; font-size: 15.5px; }
+.venue__row:last-child { border-bottom: none; }
+.venue__row .ico { width: 38px; height: 38px; flex: none; border: var(--sticker-border); border-radius: 11px; display: grid; place-items: center; background: #ffe9c2; font-size: 17px; }
+.venue__row b { display: block; font-family: var(--font-display); font-size: 16px; }
+.venue__row span { color: var(--ink-soft); font-size: 14.5px; }
+@media (max-width: 880px) { .venue { grid-template-columns: 1fr; } }
+
+/* =========================================================================
+   PATROCINIOS (tiers) + marquee logos
+   ========================================================================= */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.tier { background: #fff; border: var(--sticker-border); border-radius: var(--radius); box-shadow: var(--sticker-shadow); padding: 30px; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; }
+.tier:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
+.tier--featured { background: var(--forest); color: var(--canvas); position: relative; }
+.tier--featured .tier__price { color: var(--gold-soft); }
+.tier__flag { position: absolute; top: -14px; right: 18px; background: var(--gold-soft); border: var(--sticker-border); border-radius: 999px; font-family: var(--font-display); font-weight: 800; font-size: 12px; padding: 5px 12px; color: var(--ink); box-shadow: var(--sticker-shadow-sm); }
+.tier__name { font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.tier__price { font-family: var(--font-display); font-weight: 800; font-size: 40px; margin: 10px 0 16px; }
+.tier__perks { flex: 1; }
+.tier__perks li { list-style: none; display: flex; gap: 10px; padding: 7px 0; font-size: 14.5px; line-height: 1.5; }
+.tier__perks li::before { content: "✓"; color: var(--green); font-weight: 700; }
+.tier--featured .tier__perks li::before { color: var(--green-bright); }
+.tier .btn { margin-top: 22px; justify-content: center; }
+@media (max-width: 880px) { .tiers { grid-template-columns: 1fr; } }
+
+.logo-marquee { margin-top: 56px; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.logo-marquee__track { display: flex; gap: 20px; width: max-content; animation: scrollX 28s linear infinite; }
+.logo-marquee:hover .logo-marquee__track { animation-play-state: paused; }
+.logo-pill { display: flex; align-items: center; font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--ink-soft); background: #fff; border: var(--sticker-border); border-radius: 999px; padding: 14px 30px; white-space: nowrap; box-shadow: var(--sticker-shadow-sm); transition: transform .18s; }
+.logo-pill:hover { transform: translateY(-4px); }
+.logo-pill img { height: 30px; width: auto; }
+
+/* =========================================================================
+   COMUNIDAD (AECCTI)
+   ========================================================================= */
+.community { display: grid; grid-template-columns: .9fr 1.1fr; gap: 44px; align-items: center; }
+.community__card { background: #fff; border: var(--sticker-border); border-radius: var(--radius); box-shadow: var(--sticker-shadow); padding: 36px; }
+.community__logo { width: 150px; border: var(--sticker-border); border-radius: 14px; box-shadow: var(--sticker-shadow-sm); margin-bottom: 22px; }
+.community__quote { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.35; }
+.community__by { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-top: 16px; }
+.team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.member { display: flex; align-items: center; gap: 13px; background: #fff; border: var(--sticker-border); border-radius: 16px; padding: 14px 16px; box-shadow: var(--sticker-shadow-sm); transition: transform .18s; }
+.member:hover { transform: translateY(-4px) rotate(-.6deg); }
+.member__avatar { width: 46px; height: 46px; flex: none; border-radius: 50%; border: var(--sticker-border); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 16px; }
+.member:nth-child(4n+1) .member__avatar { background: var(--green-pale); }
+.member:nth-child(4n+2) .member__avatar { background: #ffe9c2; }
+.member:nth-child(4n+3) .member__avatar { background: #dbeefc; }
+.member:nth-child(4n+4) .member__avatar { background: #ffd9c9; }
+.member b { font-family: var(--font-display); font-size: 15px; display: block; }
+.member span { font-size: 12.5px; color: var(--ink-soft); font-family: var(--font-mono); }
+@media (max-width: 880px) { .community { grid-template-columns: 1fr; } .team { grid-template-columns: 1fr; } }
+
+/* =========================================================================
+   FAQ
+   ========================================================================= */
+.faq { max-width: 760px; }
+.faq details { background: #fff; border: var(--sticker-border); border-radius: 16px; box-shadow: var(--sticker-shadow-sm); margin-bottom: 14px; overflow: hidden; }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 19px 22px; font-family: var(--font-display); font-weight: 700; font-size: 17px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 24px; font-weight: 400; color: var(--green); transition: transform .25s; flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .a { padding: 0 22px 20px; color: var(--ink-soft); line-height: 1.65; font-size: 15.5px; }
+
+/* =========================================================================
+   NOTICIAS
+   ========================================================================= */
+.news { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.news a { display: flex; justify-content: space-between; align-items: center; gap: 18px; background: #fff; border: var(--sticker-border); border-radius: 16px; padding: 20px 24px; box-shadow: var(--sticker-shadow-sm); transition: transform .18s, box-shadow .18s; }
+.news a:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
+.news time { font-family: var(--font-mono); font-size: 12px; color: var(--terracota); font-weight: 600; }
+.news b { font-family: var(--font-display); font-size: 16.5px; display: block; margin-top: 4px; }
+.news .arr { font-size: 20px; color: var(--green); flex: none; }
+@media (max-width: 760px) { .news { grid-template-columns: 1fr; } }
+
+/* =========================================================================
+   CTA FINAL + FOOTER
+   ========================================================================= */
+.final { position: relative; overflow: hidden; }
+.final__card { position: relative; background: var(--forest); border: var(--sticker-border); border-radius: 28px; box-shadow: var(--sticker-shadow); padding: 70px 40px; text-align: center; color: var(--canvas); overflow: hidden; }
+.final__title { font-family: var(--font-display); font-weight: 800; font-size: clamp(30px, 4.6vw, 54px); line-height: 1.06; max-width: 18ch; margin: 0 auto; }
+.final__lead { color: #b8cfbe; max-width: 46ch; margin: 18px auto 32px; font-size: 17px; line-height: 1.6; }
+.final__mascot { position: absolute; width: 110px; bottom: -14px; right: 4%; rotate: -6deg; animation: bob 5s ease-in-out infinite;
+  background: #fff; border: var(--sticker-border); border-radius: 18px; padding: 6px; box-shadow: var(--sticker-shadow-sm); }
+
+.footer { background: var(--ink); color: #cfd8d1; padding: 56px 0 36px; margin-top: 96px; }
+.footer__grid { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.footer__desc { max-width: 38ch; color: #93a698; font-size: 14.5px; line-height: 1.65; margin-top: 14px; }
+.footer__cols { display: flex; gap: 56px; flex-wrap: wrap; }
+.footer__cols h4 { font-family: var(--font-display); color: #fff; font-size: 14px; margin-bottom: 12px; }
+.footer__cols a { display: block; font-size: 14.5px; color: #93a698; margin-bottom: 9px; transition: color .2s; }
+.footer__cols a:hover { color: var(--green-bright); }
+.footer__legal { border-top: 1px solid #2c3a30; margin-top: 42px; padding-top: 22px; font-size: 13px; color: #7a8d7f; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<!-- ====================== NAV ====================== -->
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#inicio">
+      <span class="brand__mark">&gt;_</span>
+      <span class="brand__name">Campus Connect<small>by AECCTI · UVG</small></span>
+    </a>
+    <nav class="nav__links">
+      <a href="#sobre">Sobre</a>
+      <a href="#programa">Programa</a>
+      <a href="#sede">Sede</a>
+      <a href="#patrocinios">Patrocinios</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn--green" href="#boletos">🎟 Boletos</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero" id="inicio">
+  <div class="hero__blob hero__blob--green"></div>
+  <div class="hero__blob hero__blob--gold"></div>
+
+  <div class="wrap hero__grid">
+    <div>
+      <span class="term-tag">wordpress_campus_connect --uvg --2026<span class="cursor"></span></span>
+
+      <h1 class="h-display hero__title">
+        <span class="word" style="animation-delay:.05s">Un</span>
+        <span class="word" style="animation-delay:.13s">día</span>
+        <span class="word" style="animation-delay:.21s">para</span>
+        <span class="word hl" style="animation-delay:.29s">crear</span>
+        <span class="word" style="animation-delay:.37s">y</span>
+        <span class="word hl" style="animation-delay:.45s">conectar</span>
+        <span class="word" style="animation-delay:.53s">con</span>
+        <span class="word" style="animation-delay:.61s">WordPress</span>
+      </h1>
+
+      <p class="lead hero__lead">Charlas, talleres y comunidad open-source en el corazón del CIT, Universidad del Valle de Guatemala. Organizado por estudiantes, para todos.</p>
+
+      <div class="hero__chips">
+        <span class="chip">📅 <b>15 agosto 2026</b></span>
+        <span class="chip chip--terra">📍 <b>CIT · Campus UVG</b></span>
+        <span class="chip chip--gold">🎟 <b>Entrada gratuita</b></span>
+      </div>
+
+      <div class="hero__actions">
+        <a class="btn btn--green" href="#boletos">Aparta tu lugar →</a>
+        <a class="btn btn--cream" href="#programa">Ver programa</a>
+      </div>
+
+      <!-- terminal AECCTI -->
+      <div class="terminal">
+        <div class="terminal__bar"><span></span><span></span><span></span><em>aeccti@uvg ~ campus-connect</em></div>
+        <div class="terminal__body">
+          <div><span class="p">&gt;</span> <span id="type-line"></span><span class="cursor"></span></div>
+          <div id="type-result" style="display:none"><span class="ok">✔</span> comunidad lista · 200 cupos · open-source 💚</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__mascot">
+      <div class="mascot__burst"></div>
+      <img class="mascot" src="assets/mascota-dragon.jpeg" alt="Mascota dragón del WordPress Campus Connect UVG"
+           onerror="this.style.display='none';document.querySelector('.mascot__fallback').style.display='grid';" />
+      <div class="mascot__fallback">🐉<br>Guarda la mascota en<br><b>assets/mascota-dragon.jpeg</b></div>
+      <span class="mascot__sticker mascot__sticker--top">¡Hola! 👋</span>
+      <span class="mascot__sticker mascot__sticker--bottom">#WCCUVG26</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CINTA ====================== -->
+<div class="ribbon" aria-hidden="true">
+  <div class="ribbon__track">
+    <span class="ribbon__item">WordPress Campus Connect</span><span class="ribbon__item">15 · Agosto · 2026</span><span class="ribbon__item">CIT — UVG</span><span class="ribbon__item">by AECCTI</span><span class="ribbon__item">Open Source</span>
+    <span class="ribbon__item">WordPress Campus Connect</span><span class="ribbon__item">15 · Agosto · 2026</span><span class="ribbon__item">CIT — UVG</span><span class="ribbon__item">by AECCTI</span><span class="ribbon__item">Open Source</span>
+  </div>
+</div>
+
+<!-- ====================== SOBRE ====================== -->
+<section class="section" id="sobre">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">sobre_el_evento</span>
+      <h2 class="h-section">Más que un evento de WordPress</h2>
+      <p class="lead" style="margin-top:14px">Un espacio donde la comunidad estudiantil y profesional de Guatemala se une para construir la web abierta.</p>
+    </div>
+
+    <div class="pillars">
+      <article class="pillar reveal" data-delay="1">
+        <div class="pillar__icon">🛠️</div>
+        <h3>Crear</h3>
+        <p>Construye sitios y productos reales con WordPress: desde tu primer blog hasta desarrollo a la medida con bloques.</p>
+      </article>
+      <article class="pillar reveal" data-delay="2">
+        <div class="pillar__icon">⚡</div>
+        <h3>Automatizar</h3>
+        <p>Flujos, plugins e integraciones con IA que te ahorran horas de trabajo y potencian cualquier proyecto.</p>
+      </article>
+      <article class="pillar reveal" data-delay="3">
+        <div class="pillar__icon">🤝</div>
+        <h3>Conectar</h3>
+        <p>Networking real con estudiantes, docentes, freelancers y empresas de la comunidad tech guatemalteca.</p>
+      </article>
+    </div>
+
+    <div class="audience">
+      <div class="reveal">
+        <span class="term-tag term-tag--light">para_quien_es</span>
+        <h3 class="h-section" style="font-size:clamp(24px,3vw,34px)">¿Para quién es?</h3>
+        <div class="audience__chips">
+          <span class="chip">🎓 Estudiantes</span>
+          <span class="chip">💻 Developers</span>
+          <span class="chip">🎨 Diseñadores</span>
+          <span class="chip">📣 Marketers</span>
+          <span class="chip">🚀 Emprendedores</span>
+          <span class="chip">🧑‍🏫 Docentes</span>
+        </div>
+      </div>
+      <ul class="reasons reveal" data-delay="1">
+        <h3>Razones para asistir</h3>
+        <li>Aprende de ponentes de la comunidad WordPress de Guatemala y la región.</li>
+        <li>Talleres prácticos: llega con laptop, sal con proyecto.</li>
+        <li>Conecta con empresas y oportunidades reales.</li>
+        <li>Vive la cultura open-source desde adentro.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PROGRAMA ====================== -->
+<section class="section section--forest scales" id="programa">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag">programa_del_dia</span>
+      <h2 class="h-section" style="color:#fff">Agenda</h2>
+      <p class="lead">Un día completo: charlas, talleres, comida y comunidad.</p>
+    </div>
+
+    <div class="tl">
+      <div class="tl-item reveal"><div class="tl-item__time">08:30</div><div class="tl-item__track"><span class="tl-item__dot"></span><div class="tl-card"><span class="tl-card__kind k-reg">Registro</span><div class="tl-card__title">Acreditación y bienvenida</div><div class="tl-card__desc">Recoge tu gafete, café de bienvenida y conoce a los organizadores de AECCTI.</div></div></div></div>
+      <div class="tl-item reveal"><div class="tl-item__time">09:30</div><div class="tl-item__track"><span class="tl-item__dot"></span><div class="tl-card"><span class="tl-card__kind k-talk">Charla</span><div class="tl-card__title">Keynote: la web abierta en 2026</div><div class="tl-card__desc">El estado de WordPress y hacia dónde va la web que construimos entre todos.</div></div></div></div>
+      <div class="tl-item reveal"><div class="tl-item__time">10:45</div><div class="tl-item__track"><span class="tl-item__dot"></span><div class="tl-card"><span class="tl-card__kind k-talk">Talleres</span><div class="tl-card__title">Bloques de talleres paralelos</div><div class="tl-card__desc">Desarrollo de bloques, diseño con el editor del sitio, y automatización con IA.</div></div></div></div>
+      <div class="tl-item reveal"><div class="tl-item__time">12:30</div><div class="tl-item__track"><span class="tl-item__dot" style="background:var(--gold-soft)"></span><div class="tl-card"><span class="tl-card__kind k-break">Break</span><div class="tl-card__title">Almuerzo y networking</div><div class="tl-card__desc">Comparte mesa con la comunidad y haz nuevas conexiones.</div></div></div></div>
+      <div class="tl-item reveal"><div class="tl-item__time">14:00</div><div class="tl-item__track"><span class="tl-item__dot"></span><div class="tl-card"><span class="tl-card__kind k-talk">Charlas</span><div class="tl-card__title">Bloque de charlas de la tarde</div><div class="tl-card__desc">Casos reales: freelancing, e-commerce y comunidades open-source en Guatemala.</div></div></div></div>
+      <div class="tl-item reveal"><div class="tl-item__time">16:30</div><div class="tl-item__track"><span class="tl-item__dot" style="background:#ff9d6b"></span><div class="tl-card"><span class="tl-card__kind k-close">Cierre</span><div class="tl-card__title">Panel de cierre y rifas</div><div class="tl-card__desc">Conclusiones, agradecimientos y sorpresas para los asistentes.</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== BOLETOS ====================== -->
+<!-- ⚠️ CORTE: aqui termina el HTML del bloque 1. El slot de abajo se
+     reemplaza por el bloque Shortcode [camptix] en WordPress. -->
+<section class="section" id="boletos">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">boletos</span>
+      <h2 class="h-section">Aparta tu lugar</h2>
+      <p class="lead" style="margin-top:14px">El registro es gratuito y los cupos son limitados. Completa tu inscripción aquí mismo.</p>
+    </div>
+
+    <div class="tickets__slot reveal">
+      <div class="tag">&lt;!-- AQUÍ VA EL BLOQUE SHORTCODE [camptix] --&gt;</div>
+      <p>En WordPress, este recuadro lo reemplaza el sistema de boletos.</p>
+    </div>
+
+    <div class="tickets__notes reveal" data-delay="1">
+      <span class="chip">🪪 Necesitas cuenta WordPress.org</span>
+      <span class="chip">📸 Habrá fotografía del evento</span>
+      <span class="chip">🎓 Cupo preferente para estudiantes UVG</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SEDE ====================== -->
+<section class="section section--soft" id="sede">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">la_sede</span>
+      <h2 class="h-section">CIT — Centro de Innovación y Tecnología</h2>
+    </div>
+
+    <div class="venue">
+      <figure class="venue__photo reveal">
+        <img src="assets/campus-uvg.jpg" alt="Edificio CIT de la Universidad del Valle de Guatemala" />
+        <figcaption>📍 Campus Central UVG, zona 15</figcaption>
+      </figure>
+
+      <div class="reveal" data-delay="1">
+        <p class="lead">Uno de los edificios más avanzados de Centroamérica: el hogar de la innovación en la UVG y la casa de este Campus Connect.</p>
+        <div class="venue__rows">
+          <div class="venue__row"><span class="ico">🏛️</span><div><b>Universidad del Valle de Guatemala</b><span>18 Avenida 11-95, zona 15, Vista Hermosa III</span></div></div>
+          <div class="venue__row"><span class="ico">🚗</span><div><b>Cómo llegar</b><span>Parqueo disponible en campus · acceso en transporte público</span></div></div>
+          <div class="venue__row"><span class="ico">👥</span><div><b>Capacidad</b><span>200 asistentes · auditorio principal + salas de taller</span></div></div>
+        </div>
+        <a class="btn btn--gold" href="https://maps.google.com/?q=Universidad+del+Valle+de+Guatemala" target="_blank" rel="noopener">Ver en Google Maps ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PATROCINIOS ====================== -->
+<section class="section" id="patrocinios">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">patrocinios</span>
+      <h2 class="h-section">Impulsa a la próxima generación</h2>
+      <p class="lead" style="margin-top:14px">Tu marca frente a 200 estudiantes y profesionales tech de Guatemala. Elige tu nivel:</p>
+    </div>
+
+    <div class="tiers">
+      <article class="tier reveal" data-delay="1">
+        <span class="tier__name" style="color:var(--ink-soft)">◆ Plata</span>
+        <div class="tier__price">$100</div>
+        <ul class="tier__perks">
+          <li>Logo en el sitio web del evento</li>
+          <li>Mención en redes sociales</li>
+          <li>Agradecimiento en el cierre</li>
+        </ul>
+        <a class="btn btn--cream" href="#contacto">Quiero patrocinar</a>
+      </article>
+
+      <article class="tier tier--featured reveal" data-delay="2">
+        <span class="tier__flag">⭐ Recomendado</span>
+        <span class="tier__name" style="color:var(--gold-soft)">◆ Oro</span>
+        <div class="tier__price">$650</div>
+        <ul class="tier__perks">
+          <li>Todo lo de Plata</li>
+          <li>Mesa/stand en el evento</li>
+          <li>Logo en gafetes y material impreso</li>
+          <li>Mención en la apertura</li>
+        </ul>
+        <a class="btn btn--gold" href="#contacto">Quiero patrocinar</a>
+      </article>
+
+      <article class="tier reveal" data-delay="3">
+        <span class="tier__name" style="color:var(--terracota)">◆ Platino</span>
+        <div class="tier__price">$1,250</div>
+        <ul class="tier__perks">
+          <li>Todo lo de Oro</li>
+          <li>Charla patrocinada (5 min)</li>
+          <li>Logo principal en escenario</li>
+          <li>Acceso a CV-book de asistentes</li>
+        </ul>
+        <a class="btn btn--cream" href="#contacto">Quiero patrocinar</a>
+      </article>
+    </div>
+
+    <!-- logos de patrocinadores -->
+    <div class="logo-marquee reveal" id="patrocinadores">
+      <div class="logo-marquee__track">
+        <span class="logo-pill"><img src="assets/sponsor-automattic.png" alt="Automattic" /></span>
+        <span class="logo-pill"><img src="assets/sponsor-woocommerce.png" alt="WooCommerce" /></span>
+        <span class="logo-pill"><img src="assets/sponsor-hostinger.png" alt="Hostinger" /></span>
+        <span class="logo-pill"><img src="assets/sponsor-bluehost.png" alt="Bluehost" /></span>
+        <span class="logo-pill">Tu marca aquí ✦</span>
+        <span class="logo-pill"><img src="assets/sponsor-automattic.png" alt="Automattic" /></span>
+        <span class="logo-pill"><img src="assets/sponsor-woocommerce.png" alt="WooCommerce" /></span>
+        <span class="logo-pill"><img src="assets/sponsor-hostinger.png" alt="Hostinger" /></span>
+        <span class="logo-pill"><img src="assets/sponsor-bluehost.png" alt="Bluehost" /></span>
+        <span class="logo-pill">Tu marca aquí ✦</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== COMUNIDAD ====================== -->
+<section class="section section--soft" id="comunidad">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">la_comunidad</span>
+      <h2 class="h-section">Hecho por estudiantes, para Guatemala</h2>
+    </div>
+
+    <div class="community">
+      <div class="community__card reveal">
+        <img class="community__logo" src="assets/logo-aeccti.jpeg" alt="Logo de AECCTI" onerror="this.remove()" />
+        <p class="community__quote">"El open-source no solo se usa: se construye en comunidad. Este evento es nuestra forma de abrir esa puerta a más estudiantes."</p>
+        <p class="community__by">— AECCTI · Asociación de Estudiantes de Ciencias de la Computación y TI</p>
+      </div>
+      <div class="team reveal" data-delay="1">
+        <div class="member"><span class="member__avatar">A</span><div><b>Nombre Apellido</b><span>lead_organizer</span></div></div>
+        <div class="member"><span class="member__avatar">B</span><div><b>Nombre Apellido</b><span>sponsors</span></div></div>
+        <div class="member"><span class="member__avatar">C</span><div><b>Nombre Apellido</b><span>speakers</span></div></div>
+        <div class="member"><span class="member__avatar">D</span><div><b>Nombre Apellido</b><span>logistica</span></div></div>
+        <div class="member"><span class="member__avatar">E</span><div><b>Nombre Apellido</b><span>diseño</span></div></div>
+        <div class="member"><span class="member__avatar">F</span><div><b>Nombre Apellido</b><span>comunicacion</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FAQ ====================== -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">preguntas_frecuentes</span>
+      <h2 class="h-section">FAQ</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details><summary>¿Necesito saber WordPress para asistir?</summary><div class="a">No. Hay charlas y talleres para todos los niveles, desde tu primer sitio hasta desarrollo avanzado.</div></details>
+      <details><summary>¿El evento tiene costo?</summary><div class="a">La entrada es gratuita, pero el cupo es limitado: asegura tu boleto en la sección de registro.</div></details>
+      <details><summary>¿Debo llevar laptop?</summary><div class="a">Para los talleres prácticos sí es recomendable. Para las charlas no es necesaria.</div></details>
+      <details><summary>¿Habrá comida?</summary><div class="a">Sí: café de bienvenida y almuerzo incluido para todos los asistentes registrados.</div></details>
+      <details><summary>¿Solo pueden asistir estudiantes de la UVG?</summary><div class="a">No, el evento está abierto a todo público: estudiantes de cualquier universidad, profesionales y curiosos del open-source.</div></details>
+      <details><summary>¿Cómo puedo patrocinar o dar una charla?</summary><div class="a">Escríbenos a través de la sección de patrocinios o contáctanos en redes de AECCTI. ¡Nos encantará escucharte!</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== NOTICIAS ====================== -->
+<section class="section section--soft" id="noticias" style="padding-top:72px;padding-bottom:72px">
+  <div class="wrap">
+    <div class="section__head reveal">
+      <span class="term-tag term-tag--light">ultimas_noticias</span>
+      <h2 class="h-section">Novedades</h2>
+    </div>
+    <div class="news reveal">
+      <a href="#"><div><time>JUL 2026</time><b>¡Bienvenidos al WordPress Campus Connect UVG!</b></div><span class="arr">→</span></a>
+      <a href="#"><div><time>JUL 2026</time><b>Convocatoria de ponentes abierta</b></div><span class="arr">→</span></a>
+      <a href="#"><div><time>AGO 2026</time><b>Buscamos voluntarios para el evento</b></div><span class="arr">→</span></a>
+      <a href="#"><div><time>AGO 2026</time><b>Conoce los paquetes de patrocinio</b></div><span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CTA FINAL ====================== -->
+<section class="section final" id="contacto" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="final__card reveal scales">
+      <h2 class="final__title">Sé parte de la comunidad WordPress de Guatemala</h2>
+      <p class="final__lead">Un día. Una comunidad. Cientos de ideas. No te quedes fuera del primer WordPress Campus Connect de la UVG.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn--gold" href="#boletos">Registrarme ahora →</a>
+        <a class="btn btn--cream" href="#patrocinios">Ser patrocinador</a>
+      </div>
+      <img class="final__mascot" src="assets/mascota-dragon.jpeg" alt="" onerror="this.remove()" />
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <a class="brand" href="#inicio">
+          <span class="brand__mark">&gt;_</span>
+          <span class="brand__name" style="color:#fff">Campus Connect<small style="color:#93a698">by AECCTI · UVG</small></span>
+        </a>
+        <p class="footer__desc">Organizado por la Asociación de Estudiantes de Ciencias de la Computación y Tecnología de la Información — Universidad del Valle de Guatemala.</p>
+      </div>
+      <div class="footer__cols">
+        <div><h4>Evento</h4><a href="#sobre">Sobre</a><a href="#programa">Programa</a><a href="#sede">Sede</a><a href="#boletos">Boletos</a></div>
+        <div><h4>Participa</h4><a href="#patrocinios">Patrocinios</a><a href="#comunidad">Comunidad</a><a href="#faq">FAQ</a></div>
+        <div><h4>Síguenos</h4><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">GitHub</a></div>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <span>© 2026 WordPress Campus Connect UVG · AECCTI</span>
+      <span>Hecho con 💚 y open-source en Guatemala</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- scroll reveal ---------- */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+}, { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---------- typing en la terminal ---------- */
+const line = document.getElementById('type-line');
+const result = document.getElementById('type-result');
+const cmd = 'wp community create --campus=uvg --free';
+let i = 0;
+function type() {
+  if (i <= cmd.length) { line.textContent = cmd.slice(0, i++); setTimeout(type, 45 + Math.random() * 60); }
+  else setTimeout(() => { result.style.display = 'block'; }, 350);
+}
+const heroIO = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) { type(); heroIO.disconnect(); } }); });
+heroIO.observe(document.querySelector('.terminal'));
+</script>
+</body>
+</html>

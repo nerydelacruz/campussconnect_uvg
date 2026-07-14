@@ -1,0 +1,48 @@
+/* ==========================================================================
+   SOBRE EL EVENTO — pilares, para quien es y razones para asistir
+   ========================================================================== */
+
+/* ---------- pilares (Crear / Automatizar / Conectar) ---------- */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.pillar {
+  background: #fff;
+  border: var(--sticker-border); border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow); padding: 30px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.pillar:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
+.pillar__icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  border: var(--sticker-border);
+  display: grid; place-items: center; font-size: 26px;
+}
+.pillar:nth-child(1) .pillar__icon { background: var(--green-pale); }
+.pillar:nth-child(2) .pillar__icon { background: #ffe9c2; }
+.pillar:nth-child(3) .pillar__icon { background: #dbeefc; }
+.pillar h3 { font-family: var(--font-display); font-weight: 800; font-size: 24px; margin: 20px 0 8px; }
+.pillar p { color: var(--ink-soft); line-height: 1.6; font-size: 15.5px; }
+
+/* ---------- para quien es + razones ---------- */
+.audience { margin-top: 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.audience__chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.audience__chips .chip { font-family: var(--font-body); font-weight: 600; }
+
+.reasons {
+  background: var(--forest); color: var(--canvas);
+  border: var(--sticker-border); border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow); padding: 32px;
+}
+.reasons h3 { font-family: var(--font-display); font-weight: 700; font-size: 22px; margin-bottom: 18px; }
+.reasons li {
+  list-style: none; display: flex; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+  font-size: 15.5px; line-height: 1.5; color: #d7e7dc;
+}
+.reasons li:last-child { border-bottom: none; }
+.reasons li::before { content: "▸"; color: var(--gold-soft); font-weight: 700; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  .pillars { grid-template-columns: 1fr; }
+  .audience { grid-template-columns: 1fr; }
+}

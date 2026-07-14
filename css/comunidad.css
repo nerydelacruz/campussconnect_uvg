@@ -1,0 +1,47 @@
+/* ==========================================================================
+   COMUNIDAD — AECCTI: cita, logo y equipo organizador
+   ========================================================================== */
+
+.community { display: grid; grid-template-columns: .9fr 1.1fr; gap: 44px; align-items: center; }
+
+/* tarjeta con la cita y el logo de AECCTI */
+.community__card {
+  background: #fff;
+  border: var(--sticker-border); border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow); padding: 36px;
+}
+.community__logo {
+  width: 150px;
+  border: var(--sticker-border); border-radius: 14px;
+  box-shadow: var(--sticker-shadow-sm);
+  margin-bottom: 22px;
+}
+.community__quote { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.35; }
+.community__by { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-top: 16px; }
+
+/* equipo organizador */
+.team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.member {
+  display: flex; align-items: center; gap: 13px;
+  background: #fff; border: var(--sticker-border); border-radius: 16px;
+  padding: 14px 16px; box-shadow: var(--sticker-shadow-sm);
+  transition: transform .18s;
+}
+.member:hover { transform: translateY(-4px) rotate(-.6deg); }
+.member__avatar {
+  width: 46px; height: 46px; flex: none; border-radius: 50%;
+  border: var(--sticker-border);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 16px;
+}
+.member:nth-child(4n+1) .member__avatar { background: var(--green-pale); }
+.member:nth-child(4n+2) .member__avatar { background: #ffe9c2; }
+.member:nth-child(4n+3) .member__avatar { background: #dbeefc; }
+.member:nth-child(4n+4) .member__avatar { background: #ffd9c9; }
+.member b { font-family: var(--font-display); font-size: 15px; display: block; }
+.member span { font-size: 12.5px; color: var(--ink-soft); font-family: var(--font-mono); }
+
+@media (max-width: 880px) {
+  .community { grid-template-columns: 1fr; }
+  .team { grid-template-columns: 1fr; }
+}

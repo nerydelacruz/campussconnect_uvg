@@ -1,0 +1,29 @@
+/* ==========================================================================
+   CTA FINAL — tarjeta verde bosque con mascota asomandose
+   ========================================================================== */
+
+.final { position: relative; overflow: hidden; }
+
+.final__card {
+  position: relative; overflow: hidden;
+  background: var(--forest); color: var(--canvas);
+  border: var(--sticker-border); border-radius: 28px;
+  box-shadow: var(--sticker-shadow);
+  padding: 70px 40px; text-align: center;
+}
+.final__title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 54px); line-height: 1.06;
+  max-width: 18ch; margin: 0 auto;
+}
+.final__lead { color: #b8cfbe; max-width: 46ch; margin: 18px auto 32px; font-size: 17px; line-height: 1.6; }
+.final__actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* mascota sticker asomandose en la esquina */
+.final__mascot {
+  position: absolute; width: 110px; bottom: -14px; right: 4%;
+  rotate: -6deg;
+  background: #fff; border: var(--sticker-border); border-radius: 18px;
+  padding: 6px; box-shadow: var(--sticker-shadow-sm);
+  animation: bob 5s ease-in-out infinite;
+}

@@ -1,0 +1,29 @@
+/* ==========================================================================
+   BOTONES Y CHIPS — lenguaje sticker (borde grueso + sombra dura)
+   ========================================================================== */
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  padding: 14px 28px; border-radius: 14px; cursor: pointer;
+  border: var(--sticker-border); box-shadow: var(--sticker-shadow);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn:hover  { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--ink); }
+
+.btn--green  { background: var(--green-bright); color: var(--ink); }
+.btn--gold   { background: var(--gold-soft); color: var(--ink); }
+.btn--cream  { background: #fff; color: var(--ink); }
+.btn--forest { background: var(--forest); color: #fff; }
+
+/* chips de datos (fecha, sede, precio, audiencias...) */
+.chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 13.5px; font-weight: 600;
+  background: #fff; border: var(--sticker-border); border-radius: 999px;
+  padding: 9px 16px; box-shadow: var(--sticker-shadow-sm);
+}
+.chip b { color: var(--green); }
+.chip--terra b { color: var(--terracota); }
+.chip--gold b { color: var(--gold); }

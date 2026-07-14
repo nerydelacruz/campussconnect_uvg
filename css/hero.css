@@ -1,0 +1,117 @@
+/* ==========================================================================
+   HERO — portada con mascota, terminal AECCTI y cinta marquee
+   ========================================================================== */
+
+.hero { position: relative; overflow: hidden; padding: 84px 0 70px; }
+
+/* blobs decorativos de fondo */
+.hero__blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; pointer-events: none; }
+.hero__blob--green { width: 480px; height: 480px; background: #bfe6c4; top: -160px; right: -120px; animation: drift 16s ease-in-out infinite; }
+.hero__blob--gold  { width: 360px; height: 360px; background: #ffe9a8; bottom: -140px; left: -100px; animation: drift 20s ease-in-out infinite reverse; }
+@keyframes drift { 50% { transform: translate(30px, 24px) scale(1.06); } }
+
+.hero__grid {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.15fr .85fr;
+  gap: 48px; align-items: center;
+}
+
+/* titular animado */
+.hero__title { font-size: clamp(44px, 6.4vw, 86px); margin-top: 26px; max-width: 13ch; }
+.hero__title .word {
+  display: inline-block; opacity: 0;
+  transform: translateY(26px) rotate(1.5deg);
+  animation: wordUp .65s forwards;
+}
+/* entrada escalonada palabra por palabra */
+.hero__title .word:nth-child(1) { animation-delay: .05s; }
+.hero__title .word:nth-child(2) { animation-delay: .13s; }
+.hero__title .word:nth-child(3) { animation-delay: .21s; }
+.hero__title .word:nth-child(4) { animation-delay: .29s; }
+.hero__title .word:nth-child(5) { animation-delay: .37s; }
+.hero__title .word:nth-child(6) { animation-delay: .45s; }
+.hero__title .word:nth-child(7) { animation-delay: .53s; }
+.hero__title .word:nth-child(8) { animation-delay: .61s; }
+@keyframes wordUp { to { opacity: 1; transform: none; } }
+
+/* subrayado dorado que se "pinta" */
+.hero__title .hl { position: relative; white-space: nowrap; }
+.hero__title .hl::after {
+  content: ""; position: absolute; left: -2%; bottom: 6%;
+  width: 104%; height: 34%; background: var(--gold-soft);
+  z-index: -1; border-radius: 6px;
+  transform: scaleX(0); transform-origin: left;
+  animation: paint .6s .8s forwards cubic-bezier(.2,.7,.2,1);
+}
+@keyframes paint { to { transform: scaleX(1); } }
+
+.hero__lead { margin-top: 24px; max-width: 46ch; font-size: 19px; }
+.hero__chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero__actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
+
+/* ---------- tarjeta terminal AECCTI ---------- */
+.terminal {
+  margin-top: 40px; max-width: 480px;
+  background: var(--forest);
+  border: var(--sticker-border); border-radius: 16px;
+  box-shadow: var(--sticker-shadow); overflow: hidden;
+}
+.terminal__bar { display: flex; align-items: center; gap: 6px; background: var(--ink); padding: 9px 14px; }
+.terminal__bar span { width: 11px; height: 11px; border-radius: 50%; }
+.terminal__bar span:nth-child(1) { background: var(--terracota); }
+.terminal__bar span:nth-child(2) { background: var(--gold-soft); }
+.terminal__bar span:nth-child(3) { background: var(--green-bright); }
+.terminal__bar em { font-style: normal; font-family: var(--font-mono); font-size: 11px; color: #8fb09e; margin-left: 8px; }
+.terminal__body { padding: 16px 18px; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.9; color: #cfe9d6; }
+.terminal__body .p  { color: var(--green-bright); }
+.terminal__body .ok { color: var(--gold-soft); }
+.terminal__result   { display: none; } /* scripts.js lo muestra al terminar de tipear */
+
+/* ---------- mascota ---------- */
+.hero__mascot { position: relative; display: flex; justify-content: center; align-items: center; }
+.mascot {
+  width: min(100%, 360px);
+  background: #fff; border: var(--sticker-border); border-radius: 32px;
+  box-shadow: var(--sticker-shadow); padding: 14px;
+  animation: bob 5s ease-in-out infinite;
+}
+@keyframes bob { 50% { transform: translateY(-16px) rotate(1.5deg); } }
+.mascot__burst {
+  position: absolute; width: 420px; height: 420px; z-index: -1;
+  background: radial-gradient(circle, var(--green-pale) 0 58%, transparent 59%);
+  border-radius: 50%;
+}
+.mascot__sticker {
+  position: absolute;
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  background: var(--gold-soft); border: var(--sticker-border); border-radius: 12px;
+  padding: 8px 14px; box-shadow: var(--sticker-shadow-sm);
+  animation: wiggle 4s ease-in-out infinite;
+}
+.mascot__sticker--top    { top: 8%; right: 4%; rotate: 6deg; }
+.mascot__sticker--bottom { bottom: 10%; left: 0; rotate: -5deg; background: #fff; animation-delay: 1.2s; }
+@keyframes wiggle { 50% { transform: translateY(-8px) rotate(-2deg); } }
+
+/* ---------- cinta marquee ---------- */
+.ribbon {
+  background: var(--forest);
+  border-top: var(--sticker-border); border-bottom: var(--sticker-border);
+  overflow: hidden; padding: 13px 0;
+}
+.ribbon__track { display: flex; gap: 44px; width: max-content; animation: scrollX 24s linear infinite; }
+@keyframes scrollX { to { transform: translateX(-50%); } }
+.ribbon__item {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--canvas); white-space: nowrap;
+  display: flex; align-items: center; gap: 44px;
+}
+.ribbon__item::after { content: "✦"; color: var(--gold-soft); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 920px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__mascot { order: -1; }
+  .mascot { width: min(70%, 300px); }
+  .terminal { max-width: 100%; }
+}

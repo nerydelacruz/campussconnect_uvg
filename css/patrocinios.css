@@ -1,0 +1,62 @@
+/* ==========================================================================
+   PATROCINIOS — tarjetas por tier + marquee de logos
+   ========================================================================== */
+
+/* ---------- tiers (Plata / Oro / Platino) ---------- */
+.tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+
+.tier {
+  background: #fff;
+  border: var(--sticker-border); border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow); padding: 30px;
+  display: flex; flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+.tier:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
+
+.tier--featured { background: var(--forest); color: var(--canvas); position: relative; }
+.tier--featured .tier__price { color: var(--gold-soft); }
+
+.tier__flag {
+  position: absolute; top: -14px; right: 18px;
+  background: var(--gold-soft); border: var(--sticker-border); border-radius: 999px;
+  font-family: var(--font-display); font-weight: 800; font-size: 12px;
+  padding: 5px 12px; color: var(--ink);
+  box-shadow: var(--sticker-shadow-sm);
+}
+.tier__name { font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.tier__name--silver   { color: var(--ink-soft); }
+.tier__name--gold     { color: var(--gold-soft); }
+.tier__name--platinum { color: var(--terracota); }
+.tier__price { font-family: var(--font-display); font-weight: 800; font-size: 40px; margin: 10px 0 16px; }
+
+.tier__perks { flex: 1; }
+.tier__perks li { list-style: none; display: flex; gap: 10px; padding: 7px 0; font-size: 14.5px; line-height: 1.5; }
+.tier__perks li::before { content: "✓"; color: var(--green); font-weight: 700; }
+.tier--featured .tier__perks li::before { color: var(--green-bright); }
+
+.tier .btn { margin-top: 22px; justify-content: center; }
+
+/* ---------- marquee de logos de patrocinadores ---------- */
+.logo-marquee {
+  margin-top: 56px; overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+.logo-marquee__track { display: flex; gap: 20px; width: max-content; animation: scrollX 28s linear infinite; }
+.logo-marquee:hover .logo-marquee__track { animation-play-state: paused; }
+
+.logo-pill {
+  display: flex; align-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--ink-soft);
+  background: #fff; border: var(--sticker-border); border-radius: 999px;
+  padding: 14px 30px; white-space: nowrap;
+  box-shadow: var(--sticker-shadow-sm);
+  transition: transform .18s;
+}
+.logo-pill:hover { transform: translateY(-4px); }
+.logo-pill img { height: 30px; width: auto; }
+
+@media (max-width: 880px) {
+  .tiers { grid-template-columns: 1fr; }
+}

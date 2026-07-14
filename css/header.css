@@ -1,0 +1,32 @@
+/* ==========================================================================
+   HEADER / NAV — sticky con blur y marca terminal AECCTI
+   ========================================================================== */
+
+.nav {
+  position: sticky; top: 0; z-index: 80;
+  background: rgba(250,245,236,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: var(--sticker-border);
+}
+.nav__inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+
+/* marca */
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand__mark {
+  font-family: var(--font-mono); font-weight: 600; font-size: 15px;
+  background: var(--forest); color: var(--green-bright);
+  border: var(--sticker-border); border-radius: 10px;
+  padding: 7px 10px; box-shadow: var(--sticker-shadow-sm);
+}
+.brand__name { font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.05; }
+.brand__name small { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 11px; color: var(--ink-soft); }
+
+/* enlaces */
+.nav__links { display: flex; align-items: center; gap: 24px; }
+.nav__links > a:not(.btn) { font-weight: 600; font-size: 15px; color: var(--ink-soft); transition: color .2s; }
+.nav__links > a:not(.btn):hover { color: var(--green); }
+.nav__links .btn { padding: 9px 18px; font-size: 15px; }
+
+@media (max-width: 900px) {
+  .nav__links > a:not(.btn) { display: none; }
+}

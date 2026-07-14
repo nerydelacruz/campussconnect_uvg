@@ -1,0 +1,25 @@
+/* ==========================================================================
+   FAQ — acordeon con details/summary (sin JavaScript)
+   ========================================================================== */
+
+.faq { max-width: 760px; }
+
+.faq details {
+  background: #fff;
+  border: var(--sticker-border); border-radius: 16px;
+  box-shadow: var(--sticker-shadow-sm);
+  margin-bottom: 14px; overflow: hidden;
+}
+.faq summary {
+  cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 19px 22px;
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+"; font-size: 24px; font-weight: 400; color: var(--green);
+  transition: transform .25s; flex: none;
+}
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq .a { padding: 0 22px 20px; color: var(--ink-soft); line-height: 1.65; font-size: 15.5px; }
