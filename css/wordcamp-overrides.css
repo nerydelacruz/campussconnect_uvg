@@ -48,6 +48,23 @@
   --font-mono:    "IBM Plex Mono", "Fira Code", monospace;
 }
 
+/* ---------- 4. integracion con el tema del sitio WordCamp ---------- */
+/* ocultar el titulo de la pagina ("Principal") en la portada */
+.home .wp-block-post-title,
+.home .entry-title,
+.page .wp-block-post-title { display: none; }
+
+/* nuestras secciones a lo ANCHO COMPLETO aunque el tema constrina el contenido */
+.nav, .hero, .ribbon, .section, .footer {
+  width: 100vw;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* que el contenedor del tema no meta padding/margen extra a nuestros bloques */
+.wp-block-html { margin: 0; }
+
 /* respeto a usuarios con animaciones reducidas */
 @media (prefers-reduced-motion: reduce) {
   .reveal { animation: none; opacity: 1; transform: none; }
