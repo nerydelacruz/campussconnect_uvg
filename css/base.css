@@ -89,6 +89,8 @@ img { display: block; max-width: 100%; }
 }
 .term-tag::before { content: ">"; color: var(--terracota); font-weight: 700; }
 .term-tag--light { background: #fff; }
+/* el <code> interno evita que WordPress convierta "--" en guiones largos */
+.term-tag code { font: inherit; color: inherit; background: transparent; padding: 0; }
 
 /* cursor parpadeante */
 .cursor {

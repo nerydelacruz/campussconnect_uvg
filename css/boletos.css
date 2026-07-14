@@ -20,7 +20,71 @@
 .tickets__notes { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
 .tickets__notes .chip { font-family: var(--font-body); font-weight: 600; font-size: 13.5px; }
 
-/* ajustes de convivencia con CampTix: que la tabla del plugin
-   respire dentro del diseño */
-#tix { margin-top: 34px; }
-#tix table { width: 100%; }
+/* ==========================================================================
+   ESTILO PARA CAMPTIX (#tix) — el formulario que genera [camptix]
+   Lo integramos al lenguaje sticker del sitio.
+   ========================================================================== */
+#tix {
+  max-width: 1160px;
+  margin: 34px auto 0;
+  padding: 0 24px 20px;
+  font-family: var(--font-body);
+}
+
+/* tabla de boletos como tarjeta sticker */
+#tix table.tix_tickets_table {
+  width: 100%;
+  background: #fff;
+  border: var(--sticker-border);
+  border-radius: var(--radius);
+  box-shadow: var(--sticker-shadow);
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+#tix th, #tix td { padding: 18px 20px; text-align: left; vertical-align: middle; }
+
+/* encabezados de la tabla */
+#tix thead th {
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--forest);
+  background: var(--green-pale);
+  border-bottom: 2px solid var(--ink);
+}
+
+/* filas de boletos */
+#tix tbody tr + tr th,
+#tix tbody tr + tr td { border-top: 1.5px dashed #d8cfbc; }
+#tix .tix-ticket-title { font-family: var(--font-display); font-weight: 800; font-size: 19px; color: var(--ink); }
+#tix .tix-ticket-excerpt { color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+#tix .tix-column-price { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--green); white-space: nowrap; }
+#tix .tix-column-remaining { font-family: var(--font-mono); color: var(--terracota); font-weight: 600; }
+
+/* selector de cantidad */
+#tix select {
+  font-family: var(--font-mono); font-size: 15px;
+  border: var(--sticker-border); border-radius: 10px;
+  padding: 8px 12px; background: #fff; cursor: pointer;
+}
+
+/* boton de registro */
+#tix input[type="submit"] {
+  font-family: var(--font-display); font-weight: 700; font-size: 17px;
+  background: var(--green-bright); color: var(--ink);
+  border: var(--sticker-border); border-radius: 14px;
+  box-shadow: var(--sticker-shadow);
+  padding: 14px 30px; margin-top: 20px; cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#tix input[type="submit"]:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+
+/* enlace y campo de cupon */
+#tix #tix-coupon-link { font-family: var(--font-mono); font-size: 13px; color: var(--green); }
+#tix #tix-coupon-input { border: var(--sticker-border); border-radius: 10px; padding: 8px 12px; }
+
+@media (max-width: 640px) {
+  #tix th, #tix td { padding: 12px 10px; }
+  #tix .tix-ticket-title { font-size: 16px; }
+}

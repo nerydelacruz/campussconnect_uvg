@@ -49,10 +49,12 @@
 }
 
 /* ---------- 4. integracion con el tema del sitio WordCamp ---------- */
-/* ocultar el titulo de la pagina ("Principal") en la portada */
-.home .wp-block-post-title,
-.home .entry-title,
-.page .wp-block-post-title { display: none; }
+/* ocultar el titulo de la pagina ("Principal") y los espaciadores
+   que el tema pone arriba del contenido (causan el hueco superior) */
+.wp-block-post-title,
+h1.wp-block-post-title,
+.entry-title { display: none !important; }
+.wp-block-spacer { display: none !important; }
 
 /* nuestras secciones a lo ANCHO COMPLETO aunque el tema constrina el contenido */
 .nav, .hero, .ribbon, .section, .footer {

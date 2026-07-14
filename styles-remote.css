@@ -95,6 +95,8 @@ img { display: block; max-width: 100%; }
 }
 .term-tag::before { content: ">"; color: #D95B2B; font-weight: 700; }
 .term-tag--light { background: #fff; }
+/* el <code> interno evita que WordPress convierta "--" en guiones largos */
+.term-tag code { font: inherit; color: inherit; background: transparent; padding: 0; }
 
 /* cursor parpadeante */
 .cursor {
@@ -431,10 +433,74 @@ img { display: block; max-width: 100%; }
 .tickets__notes { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
 .tickets__notes .chip { font-family: "Public Sans","Manrope",system-ui,sans-serif; font-weight: 600; font-size: 13.5px; }
 
-/* ajustes de convivencia con CampTix: que la tabla del plugin
-   respire dentro del diseño */
-#tix { margin-top: 34px; }
-#tix table { width: 100%; }
+/* ==========================================================================
+   ESTILO PARA CAMPTIX (#tix) — el formulario que genera [camptix]
+   Lo integramos al lenguaje sticker del sitio.
+   ========================================================================== */
+#tix {
+  max-width: 1160px;
+  margin: 34px auto 0;
+  padding: 0 24px 20px;
+  font-family: "Public Sans","Manrope",system-ui,sans-serif;
+}
+
+/* tabla de boletos como tarjeta sticker */
+#tix table.tix_tickets_table {
+  width: 100%;
+  background: #fff;
+  border: 2px solid #14231A;
+  border-radius: 22px;
+  box-shadow: 5px 5px 0 #14231A;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+#tix th, #tix td { padding: 18px 20px; text-align: left; vertical-align: middle; }
+
+/* encabezados de la tabla */
+#tix thead th {
+  font-family: "IBM Plex Mono","Fira Code",monospace;
+  font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: #0E3A22;
+  background: #DEEFE0;
+  border-bottom: 2px solid #14231A;
+}
+
+/* filas de boletos */
+#tix tbody tr + tr th,
+#tix tbody tr + tr td { border-top: 1.5px dashed #d8cfbc; }
+#tix .tix-ticket-title { font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 800; font-size: 19px; color: #14231A; }
+#tix .tix-ticket-excerpt { color: #4C5C50; font-size: 14px; line-height: 1.5; }
+#tix .tix-column-price { font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 800; font-size: 18px; color: #159A3A; white-space: nowrap; }
+#tix .tix-column-remaining { font-family: "IBM Plex Mono","Fira Code",monospace; color: #D95B2B; font-weight: 600; }
+
+/* selector de cantidad */
+#tix select {
+  font-family: "IBM Plex Mono","Fira Code",monospace; font-size: 15px;
+  border: 2px solid #14231A; border-radius: 10px;
+  padding: 8px 12px; background: #fff; cursor: pointer;
+}
+
+/* boton de registro */
+#tix input[type="submit"] {
+  font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 700; font-size: 17px;
+  background: #2FBF5C; color: #14231A;
+  border: 2px solid #14231A; border-radius: 14px;
+  box-shadow: 5px 5px 0 #14231A;
+  padding: 14px 30px; margin-top: 20px; cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#tix input[type="submit"]:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #14231A; }
+
+/* enlace y campo de cupon */
+#tix #tix-coupon-link { font-family: "IBM Plex Mono","Fira Code",monospace; font-size: 13px; color: #159A3A; }
+#tix #tix-coupon-input { border: 2px solid #14231A; border-radius: 10px; padding: 8px 12px; }
+
+@media (max-width: 640px) {
+  #tix th, #tix td { padding: 12px 10px; }
+  #tix .tix-ticket-title { font-size: 16px; }
+}
 
 /* ==========================================================================
    SEDE — CIT, Universidad del Valle de Guatemala (acento terracota)
@@ -741,10 +807,12 @@ img { display: block; max-width: 100%; }
 }
 
 /* ---------- 4. integracion con el tema del sitio WordCamp ---------- */
-/* ocultar el titulo de la pagina ("Principal") en la portada */
-.home .wp-block-post-title,
-.home .entry-title,
-.page .wp-block-post-title { display: none; }
+/* ocultar el titulo de la pagina ("Principal") y los espaciadores
+   que el tema pone arriba del contenido (causan el hueco superior) */
+.wp-block-post-title,
+h1.wp-block-post-title,
+.entry-title { display: none !important; }
+.wp-block-spacer { display: none !important; }
 
 /* nuestras secciones a lo ANCHO COMPLETO aunque el tema constrina el contenido */
 .nav, .hero, .ribbon, .section, .footer {
