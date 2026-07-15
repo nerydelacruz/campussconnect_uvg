@@ -22,3 +22,4 @@
 @import url("css/cta.css");         /* llamado final */
 @import url("css/footer.css");      /* cierre */
 @import url("css/cuenta.css");      /* pagina "Prepara tu cuenta" */
+@import url("css/wordcamp-overrides.css"); /* animaciones CSS-only (sin JavaScript) */

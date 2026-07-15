@@ -1,33 +1,32 @@
 #!/bin/bash
 # ============================================================================
-# Genera los archivos wordpress-bloque-*.html listos para pegar en WordPress:
-#  - Quita <head>, comentarios HTML y etiquetas de documento
-#  - Convierte acentos y emojis a entidades HTML (a prueba de problemas
-#    de codificacion al copiar/pegar)
+# Genera los wordpress-bloque-*.html a partir de las FUENTES UNICAS:
+#   landing.html          -> wordpress-bloque-1.html + wordpress-bloque-2.html
+#                            (se parte en el marcador CAMPTIX)
+#
+# Limpieza aplicada a cada bloque:
+#   - quita <head>, comentarios HTML y etiquetas de documento
+#   - convierte acentos/emojis a entidades HTML (a prueba de codificacion)
 # Uso:  ./build-blocks.sh
 # ============================================================================
 set -e
 cd "$(dirname "$0")"
 
-gen () {
-  src="$1"; out="$2"
+clean () {
   perl -0777 -pe '
     s/<head>.*?<\/head>//s;
     s/<!--.*?-->//gs;
     s/<\/?(!DOCTYPE[^>]*|html[^>]*|body)>//gi;
-    s/<script src="scripts.js"><\/script>//g;
     s/^\s*\n//gm;
-  ' "$src" | python3 -c "
+  ' | python3 -c "
 import sys
 text = sys.stdin.read()
-out = []
-for ch in text:
-    out.append(ch if ord(ch) < 128 else '&#%d;' % ord(ch))
-sys.stdout.write(''.join(out))
-" > "$out"
-  echo "✔ $out"
+sys.stdout.write(''.join(ch if ord(ch) < 128 else '&#%d;' % ord(ch) for ch in text))
+"
 }
 
-gen index-parte-1.html      wordpress-bloque-1.html
-gen index-parte-2.html      wordpress-bloque-2.html
-gen cuenta-wordpress.html   wordpress-bloque-cuenta.html
+# --- landing: partir en el marcador CAMPTIX ---
+awk '/================== CAMPTIX ==================/{exit} {print}' landing.html | clean > wordpress-bloque-1.html
+awk 'f{print} /================== CAMPTIX ==================/{f=1}' landing.html | clean > wordpress-bloque-2.html
+echo "✔ wordpress-bloque-1.html"
+echo "✔ wordpress-bloque-2.html"
