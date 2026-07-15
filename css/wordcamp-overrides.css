@@ -66,11 +66,19 @@ h1.wp-block-post-title,
 }
 /* 2) nuestras secciones ocupan el 100% de ese contenedor ya sin padding;
    el ancho de lectura lo controla .wrap por dentro */
-.nav, .hero, .ribbon, .section, .footer {
+.nav, .hero, .ribbon, .section, .footer, .guide-hero {
   width: 100%;
   max-width: none !important;
   margin-left: 0;
   margin-right: 0;
+}
+
+/* 3) el tema agrega margen vertical (margin-block-start) entre los hijos
+   del contenido; nuestras secciones controlan su propio espaciado */
+.entry-content > *,
+.wp-block-post-content > * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
 }
 
 /* que el contenedor del tema no meta padding/margen extra a nuestros bloques */
