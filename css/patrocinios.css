@@ -4,6 +4,8 @@
 
 /* ---------- tiers (Plata / Oro / Platino) ---------- */
 .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+/* variante de un solo tier: tarjeta centrada */
+.tiers--single { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
 
 .tier {
   background: #fff;

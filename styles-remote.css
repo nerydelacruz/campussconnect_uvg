@@ -547,6 +547,8 @@ img { display: block; max-width: 100%; }
 
 /* ---------- tiers (Plata / Oro / Platino) ---------- */
 .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+/* variante de un solo tier: tarjeta centrada */
+.tiers--single { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
 
 .tier {
   background: #fff;
@@ -756,6 +758,106 @@ img { display: block; max-width: 100%; }
 /* variantes de la marca sobre fondo oscuro */
 .footer .brand__name { color: #fff; }
 .footer .brand__name small { color: #93a698; }
+
+/* ==========================================================================
+   PREPARA TU CUENTA — guia paso a paso para crear la cuenta WordPress.org
+   Pagina: /prepara-tu-cuenta/
+   ========================================================================== */
+
+/* ---------- hero compacto de la guia ---------- */
+.guide-hero { position: relative; overflow: hidden; padding: 64px 0 48px; }
+.guide-hero__title {
+  font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 800;
+  font-size: clamp(34px, 5vw, 60px);
+  letter-spacing: -0.02em; line-height: 1.05;
+  margin-top: 22px; max-width: 16ch;
+}
+.guide-hero__lead { margin-top: 18px; max-width: 52ch; }
+
+/* volver al inicio */
+.guide-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "IBM Plex Mono","Fira Code",monospace; font-size: 13px; font-weight: 600;
+  color: #159A3A; margin-bottom: 20px;
+}
+.guide-back:hover { color: #0E3A22; }
+
+/* ---------- por que necesitas la cuenta ---------- */
+.guide-why {
+  background: #DEEFE0;
+  border: 2px solid #14231A; border-radius: 22px;
+  box-shadow: 5px 5px 0 #14231A;
+  padding: 26px 30px; margin-top: 34px; max-width: 720px;
+}
+.guide-why b { font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-size: 17px; display: block; margin-bottom: 8px; }
+.guide-why p { color: #4C5C50; font-size: 15.5px; line-height: 1.6; margin: 0; }
+
+/* ---------- pasos numerados ---------- */
+.steps { max-width: 760px; margin-top: 10px; }
+.step {
+  display: flex; gap: 22px; align-items: flex-start;
+  background: #fff;
+  border: 2px solid #14231A; border-radius: 22px;
+  box-shadow: 5px 5px 0 #14231A;
+  padding: 28px; margin-bottom: 22px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.step:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 #14231A; }
+.step__num {
+  flex: none; width: 52px; height: 52px; border-radius: 14px;
+  border: 2px solid #14231A;
+  background: #FFD43B;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "IBM Plex Mono","Fira Code",monospace; font-weight: 600; font-size: 22px;
+}
+.step:nth-child(2) .step__num { background: #DEEFE0; }
+.step:nth-child(3) .step__num { background: #dbeefc; }
+.step:nth-child(4) .step__num { background: #ffd9c9; }
+.step__body h3 { font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 800; font-size: 21px; margin: 4px 0 8px; }
+.step__body p { color: #4C5C50; font-size: 15.5px; line-height: 1.65; margin: 0 0 8px; }
+.step__body p:last-child { margin-bottom: 0; }
+
+/* enlace destacado dentro de un paso */
+.step__link {
+  display: inline-block;
+  font-family: "IBM Plex Mono","Fira Code",monospace; font-size: 14px; font-weight: 600;
+  color: #0E3A22;
+  background: #DEEFE0;
+  border: 2px solid #14231A; border-radius: 999px;
+  padding: 6px 14px; margin: 4px 0 8px;
+  box-shadow: 3px 3px 0 #14231A;
+}
+.step__link:hover { background: #FFD43B; }
+
+/* advertencias / tips dentro de un paso */
+.step__tip {
+  border-left: 4px solid #F0A402;
+  background: #fff8e1;
+  border-radius: 0 10px 10px 0;
+  padding: 10px 14px;
+  font-size: 14px; color: #4C5C50; line-height: 1.55;
+}
+
+/* ---------- tarjeta de ayuda (si algo sale mal) ---------- */
+.guide-help {
+  background: #0E3A22; color: #FAF5EC;
+  border: 2px solid #14231A; border-radius: 22px;
+  box-shadow: 5px 5px 0 #14231A;
+  padding: 30px; max-width: 760px; margin-top: 40px;
+}
+.guide-help h3 { font-family: "Bricolage Grotesque","Rubik",system-ui,sans-serif; font-weight: 700; font-size: 21px; margin-bottom: 10px; }
+.guide-help p { color: #b8cfbe; font-size: 15.5px; line-height: 1.65; margin: 0 0 10px; }
+.guide-help a { color: #FFD43B; font-weight: 600; }
+.guide-help a:hover { color: #fff; }
+
+/* ---------- que sigue despues ---------- */
+.guide-next { margin-top: 48px; }
+.guide-next__chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 560px) {
+  .step { flex-direction: column; gap: 14px; }
+}
 
 /* ==========================================================================
    ADAPTACION WORDCAMP.ORG — se agrega SOLO al bundle remoto (styles-remote.css)

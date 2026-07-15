@@ -17,7 +17,7 @@ OUT=styles-remote.css
   echo "   Archivo GENERADO por build-css.sh: no editar a mano."
   echo "   Variables CSS resueltas a literales (el sanitizador las elimina)."
   echo "   ========================================================================== */"
-  for f in base buttons header hero about agenda boletos sede patrocinios comunidad faq noticias cta footer wordcamp-overrides; do
+  for f in base buttons header hero about agenda boletos sede patrocinios comunidad faq noticias cta footer cuenta wordcamp-overrides; do
     echo ""
     cat "css/$f.css"
   done
