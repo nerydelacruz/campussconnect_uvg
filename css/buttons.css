@@ -25,5 +25,15 @@
   padding: 9px 16px; box-shadow: var(--sticker-shadow-sm);
 }
 .chip b { color: var(--green); }
+/* en secciones oscuras el chip hereda el color crema: forzar tinta */
+.section--forest .chip { color: var(--ink); }
 .chip--terra b { color: var(--terracota); }
 .chip--gold b { color: var(--gold); }
+
+/* chip destacado: horas de extensión (fondo dorado + balanceo suave) */
+.chip--hours {
+  background: var(--gold-soft);
+  animation: chipWiggle 3.2s ease-in-out infinite;
+}
+.chip--hours b { color: var(--ink); }
+@keyframes chipWiggle { 50% { transform: translateY(-5px) rotate(-1.2deg); } }

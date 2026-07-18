@@ -1,47 +1,92 @@
 /* ==========================================================================
-   COMUNIDAD — AECCTI: cita, logo y equipo organizador
+   COMUNIDAD — AECCTI: tarjeta terminal de dos paneles (identidad + cita)
    ========================================================================== */
 
-.community { display: grid; grid-template-columns: .9fr 1.1fr; gap: 44px; align-items: center; }
+.community { display: flex; justify-content: center; }
 
-/* tarjeta con la cita y el logo de AECCTI */
+/* tarjeta estilo terminal: barra superior + cuerpo en dos paneles */
 .community__card {
+  max-width: 940px; width: 100%;
   background: #fff;
   border: var(--sticker-border); border-radius: var(--radius);
-  box-shadow: var(--sticker-shadow); padding: 36px;
+  box-shadow: var(--sticker-shadow);
+  overflow: hidden; padding: 0;
+  transition: transform .2s, box-shadow .2s;
+}
+.community__card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--ink); }
+
+/* barra tipo terminal (mismo motivo que el hero) */
+.community__bar {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--ink); padding: 10px 16px;
+}
+.community__bar span { width: 11px; height: 11px; border-radius: 50%; }
+.community__bar span:nth-child(1) { background: var(--terracota); }
+.community__bar span:nth-child(2) { background: var(--gold-soft); }
+.community__bar span:nth-child(3) { background: var(--green-bright); }
+.community__bar em {
+  font-style: normal; font-family: var(--font-mono);
+  font-size: 11px; color: #8fb09e; margin-left: 8px;
+}
+
+/* cuerpo: panel identidad (verde bosque) + panel cita (blanco) */
+.community__body { display: grid; grid-template-columns: .42fr .58fr; }
+
+.community__id {
+  position: relative;
+  background: var(--forest); color: var(--canvas);
+  padding: 38px 32px 44px;
+  border-right: var(--sticker-border);
 }
 .community__logo {
-  width: 150px;
+  width: 130px;
+  background: #fff;
   border: var(--sticker-border); border-radius: 14px;
   box-shadow: var(--sticker-shadow-sm);
-  margin-bottom: 22px;
+  margin-bottom: 20px;
+  rotate: -2deg;
 }
-.community__quote { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2.4vw, 27px); line-height: 1.35; }
-.community__by { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); margin-top: 16px; }
+.community__name {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(30px, 3.4vw, 40px); line-height: 1;
+  color: var(--canvas); letter-spacing: .01em;
+}
+.community__tag {
+  font-family: var(--font-mono); font-size: 13.5px; line-height: 1.6;
+  color: var(--green-bright); margin-top: 10px;
+}
+.community__badge {
+  position: absolute; bottom: -14px; right: 18px;
+  font-family: var(--font-display); font-weight: 800; font-size: 13px;
+  background: var(--gold-soft); color: var(--ink);
+  border: var(--sticker-border); border-radius: 12px;
+  padding: 7px 13px; box-shadow: var(--sticker-shadow-sm);
+  rotate: -4deg;
+}
 
-/* equipo organizador */
-.team { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.member {
-  display: flex; align-items: center; gap: 13px;
-  background: #fff; border: var(--sticker-border); border-radius: 16px;
-  padding: 14px 16px; box-shadow: var(--sticker-shadow-sm);
-  transition: transform .18s;
+/* panel de la cita */
+.community__quotebox { position: relative; padding: 40px 42px 38px; }
+.community__mark {
+  position: absolute; top: 6px; left: 26px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 110px; line-height: 1; color: var(--gold-soft);
+  pointer-events: none;
 }
-.member:hover { transform: translateY(-4px) rotate(-.6deg); }
-.member__avatar {
-  width: 46px; height: 46px; flex: none; border-radius: 50%;
-  border: var(--sticker-border);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-weight: 800; font-size: 16px;
+.community__quote {
+  position: relative;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(20px, 2.3vw, 26px); line-height: 1.35;
+  margin-top: 26px;
 }
-.member:nth-child(4n+1) .member__avatar { background: var(--green-pale); }
-.member:nth-child(4n+2) .member__avatar { background: #ffe9c2; }
-.member:nth-child(4n+3) .member__avatar { background: #dbeefc; }
-.member:nth-child(4n+4) .member__avatar { background: #ffd9c9; }
-.member b { font-family: var(--font-display); font-size: 15px; display: block; }
-.member span { font-size: 12.5px; color: var(--ink-soft); font-family: var(--font-mono); }
+.community__by {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--ink-soft); margin-top: 18px;
+  padding-top: 16px; border-top: 2px dashed var(--green-pale);
+}
 
 @media (max-width: 880px) {
-  .community { grid-template-columns: 1fr; }
-  .team { grid-template-columns: 1fr; }
+  .community__body { grid-template-columns: 1fr; }
+  .community__id { border-right: none; border-bottom: var(--sticker-border); padding-bottom: 50px; }
+  .community__quotebox { padding: 34px 26px 30px; }
+  .community__mark { left: 16px; font-size: 90px; }
 }

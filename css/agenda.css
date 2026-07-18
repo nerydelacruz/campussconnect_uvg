@@ -4,6 +4,21 @@
 
 .tl { max-width: 860px; }
 
+/* encabezado de jornada: sticker crema sobre el fondo verde bosque */
+.tl-day {
+  display: inline-flex; align-items: baseline; gap: 12px;
+  font-family: var(--font-display); font-weight: 800; font-size: 21px;
+  background: var(--canvas); color: var(--ink);
+  border: var(--sticker-border); border-radius: 14px;
+  padding: 11px 20px; box-shadow: var(--sticker-shadow-sm);
+  margin: 40px 0 28px; rotate: -1deg;
+}
+.tl-day:first-child { margin-top: 0; }
+.tl-day small {
+  font-family: var(--font-mono); font-weight: 600;
+  font-size: 12.5px; color: var(--green);
+}
+
 .tl-item { display: grid; grid-template-columns: 90px 1fr; gap: 20px; }
 .tl-item__time {
   font-family: var(--font-mono); font-weight: 600; font-size: 17px;
@@ -38,6 +53,7 @@
 .k-talk  { color: #7fd4f0; }
 .k-break { color: var(--gold-soft); }
 .k-close { color: #ff9d6b; }
+.k-hack  { color: #c9b6ff; }
 
 .tl-card__title { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin: 10px 0 5px; color: #fff; }
 .tl-card__desc { color: #b8cfbe; font-size: 14.5px; line-height: 1.55; }
